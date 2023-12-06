@@ -18,9 +18,9 @@ The project includes a TODO list that outlines areas for improvement, additions,
 
 - TODO-07: Write code here for rewarding an account according to the sequence diagram in the lab document
 - TODO-08: Return the corresponding reward confirmation
-- TODO-17 (Optional): Create custom AuthenticationProvider
-    Note that it needs to implement AuthenticationProvider interface
-      Uncomment the commented code fragment below so that this custom
+- TODO-17 (Optional): Create custom AuthenticationProvider.
+    Note that it needs to implement AuthenticationProvider interface.
+      Uncomment the commented code fragment below so that this custom.
         AuthenticationProvider handles a user with the following credentials
 - TODO-18a (Optional): Add authentication based upon the custom AuthenticationProvider
 
