@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Rewards-Reference-Domain
 
 This project is a part of the Spring Academy learning path, where I am exploring and applying concepts related to building a Rewards Application with Spring Boot.
@@ -32,10 +31,8 @@ Future commits will involve addressing the TODO list, incorporating concepts lea
 ## License
 
 This project/learning material is provided by Spring Academy.
-=======
+
 # Core Spring and Spring Boot Lab Projects
 
 Labs for the Core Spring and Spring Boot courses
 
-To import these labs into your IDE, import the parent pom `lab/pom.xml` as Maven projects or `lab/build.gradle` as Gradle projects.
->>>>>>> 494bce4 (1.18.1)
