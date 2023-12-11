@@ -33,7 +33,7 @@ public class JdbcAccountRepository implements AccountRepository {
 	 *
 	 * @param dataSource the data source
 	 */
-	
+
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
