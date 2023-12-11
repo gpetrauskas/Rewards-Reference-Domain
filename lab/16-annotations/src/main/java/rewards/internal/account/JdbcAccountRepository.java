@@ -5,6 +5,7 @@ import common.money.Percentage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -23,7 +24,7 @@ import java.sql.SQLException;
  *   with @Autowired.
  */
 
-@ComponentScan
+@Component
 public class JdbcAccountRepository implements AccountRepository {
 
 	private DataSource dataSource;
