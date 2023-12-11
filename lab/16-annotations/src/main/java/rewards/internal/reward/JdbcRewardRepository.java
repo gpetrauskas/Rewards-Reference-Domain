@@ -3,6 +3,7 @@ package rewards.internal.reward;
 import common.datetime.SimpleDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import rewards.AccountContribution;
 import rewards.Dining;
 import rewards.RewardConfirmation;
@@ -23,7 +24,8 @@ import java.sql.*;
  *   with @Autowired.
  */
 
-@ComponentScan
+
+@Component
 public class JdbcRewardRepository implements RewardRepository {
 
 	private DataSource dataSource;
