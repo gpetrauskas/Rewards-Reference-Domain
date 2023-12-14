@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Profile;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -87,8 +88,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * - Run the test again.
  */
 
-@SpringBootTest
-@SpringJUnitConfig(TestInfrastructureConfig.class)
+@SpringJUnitConfig(TestInfrastructureConfig.InnerConfig.class)
+@ActiveProfiles({"jdbc", "jndi"})
 public class RewardNetworkTests {
 
 	
