@@ -20,4 +20,14 @@ public class TestInfrastructureConfig {
 	public static LoggingBeanPostProcessor loggingBean(){
 		return new LoggingBeanPostProcessor();
 	}
+
+	@Configuration
+	@Import({
+			TestInfrastructureLocalConfig.class,
+			TestInfrastructureJndiConfig.class,
+			RewardsConfig.class
+	})
+	public static class InnerConfig {
+
+	}
 }
