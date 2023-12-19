@@ -18,7 +18,51 @@ package rewards;
 //   (2) Add @ConfigurationPropertiesScan to RewardsApplication class or
 //   (3) Annotate this class with @Component
 // - Implement a new command line runner that displays the name of the rewards
-//   recipient when the application gets started
+//   recipient when the application gets
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+@ConfigurationProperties(prefix = "rewards.recipient")
 public class RewardsRecipientProperties {
+
+    private String name;
+    private int age;
+    private String gender;
+    private String hobby;
+
+    public RewardsRecipientProperties() {
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
+    }
 
 }
