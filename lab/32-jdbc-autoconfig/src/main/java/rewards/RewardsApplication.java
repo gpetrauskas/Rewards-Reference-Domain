@@ -2,7 +2,11 @@ package rewards;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 // TODO-00 : In this lab, you are going to exercise the following:
 // - Understanding how auto-configuration is triggered in Spring Boot application
@@ -35,6 +39,7 @@ import org.springframework.boot.SpringApplication;
 // TODO-13 (Optional) : Follow the instruction in the lab document.
 //           The section titled "Build and Run using Command Line tools".
 
+@SpringBootApplication
 public class RewardsApplication {
     static final String SQL = "SELECT count(*) FROM T_ACCOUNT";
 
@@ -56,6 +61,13 @@ public class RewardsApplication {
     // - Use the JdbcTemplate bean that Spring Boot auto-configured for you
     // - Run this application and verify "Hello, there are 21 accounts" log message
     //   gets displayed in the console
+
+    @Bean
+    public CommandLineRunner commandLineRunner(JdbcTemplate jdbcTemplate) {
+        Integer accountCount = jdbcTemplate.queryForObject(SQL, Integer.class);
+
+        return args ->  logger.info("Hello, there are {} accounts", accountCount);
+    }
 
     // TODO-07 (Optional): Enable full debugging in order to observe how Spring Boot
     //           performs its auto-configuration logic
