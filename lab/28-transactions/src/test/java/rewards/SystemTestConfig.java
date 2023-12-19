@@ -2,6 +2,7 @@ package rewards;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -36,7 +37,7 @@ public class SystemTestConfig {
 	//           How does it know which dataSource to manage?
 
 	@Bean
-	public TransactionManager transactionManager(DataSource dataSource) {
+	public TransactionManager transactionManager(@Qualifier("dataSource") DataSource dataSource) {
 		DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
 		dataSourceTransactionManager.setDataSource(dataSource);
 		return  dataSourceTransactionManager;
