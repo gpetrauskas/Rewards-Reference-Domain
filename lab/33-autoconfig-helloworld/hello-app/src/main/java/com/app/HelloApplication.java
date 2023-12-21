@@ -1,6 +1,7 @@
 package com.app;
 
 import com.lib.HelloService;
+import com.lib.TypicalHelloService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -126,7 +127,11 @@ public class HelloApplication {
     public CommandLineRunner commandLineRunner(HelloService helloService) {
 
         return args -> helloService.greet();
+    }
 
+    @Bean
+    public HelloService helloService() {
+        return new TypicalHelloService();
     }
 
 }
