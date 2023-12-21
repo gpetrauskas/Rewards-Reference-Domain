@@ -2,10 +2,12 @@ package com.app;
 
 import com.lib.HelloService;
 import com.lib.TypicalHelloService;
+import com.starter.HelloAutoConfig;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 
 // TODO-10: Go to TO-DO-10 in the setting.gradle file (Gradle)
 //          or in the root pom.xml (Maven)
@@ -105,6 +107,7 @@ import org.springframework.context.annotation.Bean;
 //          This time, you should see the two positive matches.
 
 @SpringBootApplication
+@Import(HelloAutoConfig.class)
 public class HelloApplication {
 
     public static void main(String[] args) {
@@ -129,7 +132,7 @@ public class HelloApplication {
         return args -> helloService.greet();
     }
 
-    @Bean
+    //@Bean
     public HelloService helloService() {
         return new TypicalHelloService();
     }
