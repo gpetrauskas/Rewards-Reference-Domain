@@ -2,6 +2,8 @@ package com.starter;
 
 import com.lib.HelloService;
 import com.lib.TypicalHelloService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 // - This will make sure this auto-configuration class is used only
 //   when the "HelloService.class" is in the classpath
 
+@ConditionalOnClass(HelloService.class)
 public class HelloAutoConfig {
 
     // TODO-34: Add @ConditionalOnMissingBean(HelloService.class) to the method
@@ -22,6 +25,7 @@ public class HelloAutoConfig {
     //   only when there is no "HelloService" bean already in the application
     //   context
     @Bean
+    @ConditionalOnMissingBean(HelloService.class)
     HelloService helloService() {
         return new TypicalHelloService();
     }
