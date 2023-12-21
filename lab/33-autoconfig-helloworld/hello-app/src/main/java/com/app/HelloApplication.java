@@ -1,5 +1,6 @@
 package com.app;
 
+import com.config.MyOwnConfig;
 import com.lib.HelloService;
 import com.lib.TypicalHelloService;
 import com.starter.HelloAutoConfig;
@@ -107,7 +108,7 @@ import org.springframework.context.annotation.Import;
 //          This time, you should see the two positive matches.
 
 @SpringBootApplication
-@Import(HelloAutoConfig.class)
+@Import({MyOwnConfig.class, HelloAutoConfig.class})
 public class HelloApplication {
 
     public static void main(String[] args) {
