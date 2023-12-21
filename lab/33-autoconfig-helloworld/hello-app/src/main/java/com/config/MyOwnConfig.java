@@ -1,2 +1,16 @@
-package com.config;public class MyOwnConfig {
+package com.config;
+
+import com.app.MyOwnHelloService;
+import com.lib.HelloService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class MyOwnConfig {
+
+    @Bean
+    public MyOwnHelloService helloService() {
+        return new MyOwnHelloService();
+    }
+
 }
