@@ -23,6 +23,6 @@ public interface AccountRepository extends Repository<Account, Long> {
 	 * @return the account object
 	 */
 	// To refactor: right click on the method name -> Refactor -> Rename
-	Account findByCreditCardNumber(String creditCardNumber);
+	public Account findByCreditCardNumber(String creditCardNumber);
 
 }
