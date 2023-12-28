@@ -4,6 +4,7 @@ import common.money.Percentage;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import rewards.internal.account.Account;
@@ -82,33 +83,38 @@ public class AccountClientTests {
 	}
 	
 	@Test
-	@Disabled
 	public void addAndDeleteBeneficiary() {
 		// perform both add and delete to avoid issues with side effects
-		
+
 		// TODO-13: Create a new Beneficiary
-		// - Remove the @Disabled on this test method.
-		// - Create a new Beneficiary called "David" for the account with id 1
-		//	 (POST the String "David" to the "/accounts/{accountId}/beneficiaries" URL).
-		// - Store the returned location URI in a variable.
-		
+		// create new beneficiary called David for the account with id 1
+		ResponseEntity<Void> response = restTemplate
+				.postForEntity(BASE_URL + "/accounts/1/beneficiaries?beneficiaryName=David", null, Void.class);
+
+		// ensure that the request was successful
+		assertEquals(HttpStatus.CREATED, response.getStatusCode());
+
+		// store the returned location URI in variable
+		URI location = response.getHeaders().getLocation();
+		// ensure that location is not null
+		assertNotNull(location);
+
 		// TODO-14: Retrieve the Beneficiary you just created from the location that was returned
-		Beneficiary newBeneficiary = null; // Modify this line to use the restTemplate
-		
+		// retrieve beneficiary from location was just created.
+		Beneficiary newBeneficiary = restTemplate
+				.getForObject(location, Beneficiary.class);
+
+		// check if retrieved beneficiary match with specific name, "David" at this current check
 		assertNotNull(newBeneficiary);
 		assertEquals("David", newBeneficiary.getName());
-		
-		// TODO-15: Delete the newly created Beneficiary
 
+		// TODO-15: Delete the newly created Beneficiary
+		restTemplate.delete(location);
 
 		HttpClientErrorException httpClientErrorException = assertThrows(HttpClientErrorException.class, () -> {
 			System.out.println("You SHOULD get the exception \"No such beneficiary with name 'David'\" in the server.");
-
 			// TODO-16: Try to retrieve the newly created Beneficiary again.
-			// - Run this test, then. It should pass because we expect a 404 Not Found
-			//   If not, it is likely your delete in the previous step
-			//   was not successful.
-
+			restTemplate.getForObject(location, Beneficiary.class);
 		});
 		assertEquals(HttpStatus.NOT_FOUND, httpClientErrorException.getStatusCode());
 	}
