@@ -156,7 +156,8 @@ public class AccountController {
 	// TODO-12: Complete this method by adding the appropriate annotations to:
 	// a. Respond to a DELETE to /accounts/{accountId}/beneficiaries/{beneficiaryName}
 	// b. Indicate a "204 No Content" status
-	public void removeBeneficiary(long accountId, String beneficiaryName) {
+	@DeleteMapping("/accounts/{accountId}/beneficiaries/{beneficiaryName}")
+	public void removeBeneficiary(@PathVariable("accountId") long accountId, @PathVariable("beneficiaryName") String beneficiaryName) {
 		Account account = accountManager.getAccount(accountId);
 		if (account == null) {
 			throw new IllegalArgumentException("No such account with id " + accountId);
