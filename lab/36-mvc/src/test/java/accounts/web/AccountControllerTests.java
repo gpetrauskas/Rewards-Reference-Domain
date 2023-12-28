@@ -4,6 +4,7 @@ import accounts.internal.StubAccountManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.NotNull;
 import rewards.internal.account.Account;
 
 import java.util.List;
@@ -43,16 +44,19 @@ public class AccountControllerTests {
 
 	// TODO-10a: Remove the @Disabled annotation, run the test, it should pass.
 	@Test
-	@Disabled
 	public void testHandleDetailsRequest() {
 		// TODO-09a: Implement test code which calls the accountDetails() method on the controller.
 		// - It will take one parameter - use "expectedAccountId" defined above
 		// - It will return an Account
+		Account account = controller.accountDetails(String.valueOf(expectedAccountId)).getBody();
 
 		// TODO-09b: Define the following assertions:
 		// - The account is not null
+		assertNotNull(account);
 		// - The account id matches "expectedAccountId" defined above
+		assertEquals(expectedAccountId, account.getEntityId());
 		// - The account number matches "expectedAccountNumber" defined above
+		assertEquals(expectedAccountNumber, account.getNumber());
 	}
 
 }
