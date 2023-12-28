@@ -71,12 +71,16 @@ public class AccountController {
 
 	@PostMapping("/accounts")
 	public ResponseEntity<Void> createAccount(@RequestBody Account newAccount) {
-		// Saving the account also sets its entity Id
-		Account account = accountManager.save(newAccount);
-
-		// Return a ResponseEntity - it will be used to build the
-		// HttpServletResponse.
-		return entityWithLocation(account.getEntityId());
+		try {
+			// Saving the account also sets its entity Id
+			Account account = accountManager.save(newAccount);
+			// Return a ResponseEntity - it will be used to build the
+			// HttpServletResponse.
+			return entityWithLocation(account.getEntityId());
+		} catch (Exception e) {
+			// return generic error response
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 	/**
