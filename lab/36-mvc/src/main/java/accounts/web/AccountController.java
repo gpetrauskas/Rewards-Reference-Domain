@@ -64,7 +64,9 @@ public class AccountController {
 	// - Save all work.
 	@GetMapping("/accounts/{entityId}")
 	public ResponseEntity<Account> accountDetails(@PathVariable Long entityId) {
-		
+		if (entityId == null || accountManager.getAccount(entityId) == null) {
+			return ResponseEntity.notFound().build();
+		}
 		return ResponseEntity.ok(accountManager.getAccount(entityId));
 	}
 
