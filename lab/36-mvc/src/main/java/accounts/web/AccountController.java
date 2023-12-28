@@ -55,21 +55,17 @@ public class AccountController {
 	}
 
 	// TODO-08: Implement the /accounts/{entityId} request handling method.
-	// - Call the method accountDetails().
-	// - Annotate to define URL mapping /accounts/{entityId}
-	//   this method will respond to.
-	// - Use a method parameter to obtain the URI template parameter
-	//   needed to retrieve an account.
-	// - Use the accountManager to obtain an account. This is the value to return
-	// - Save all work.
 	@GetMapping("/accounts/{entityId}")
 	public ResponseEntity<Account> accountDetails(@PathVariable String entityId) {
+		// try block to try parse entityId as Long
 		try {
 			Long accountId = Long.parseLong(entityId);
+			/// if success parsing, checks if its not a null
 			if (accountId == null || accountManager.getAccount(accountId) == null) {
 				return ResponseEntity.notFound().build();
 			}
 			return ResponseEntity.ok(accountManager.getAccount(accountId));
+			// if fail to parse, throws an exception
 		} catch (NumberFormatException e) {
 			return ResponseEntity.notFound().build();
 		}
