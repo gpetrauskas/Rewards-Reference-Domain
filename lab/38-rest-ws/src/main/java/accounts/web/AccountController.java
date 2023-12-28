@@ -15,6 +15,7 @@ import rewards.internal.account.Beneficiary;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * A controller handling requests for CRUD operations on Accounts and their
@@ -125,14 +126,27 @@ public class AccountController {
 	// a. Respond to a POST /accounts/{accountId}/beneficiaries
 	// b. Extract a beneficiary name from the incoming request
 	// c. Indicate a "201 Created" status
-	public ResponseEntity<Void> addBeneficiary(long accountId, String beneficiaryName) {
-		
-		// TODO-11: Create a ResponseEntity containing the location of the newly
-		// created beneficiary.
-		// a. Use accountManager's addBeneficiary method to add a beneficiary to an account
-		// b. Use the entityWithLocation method - like we did for createAccount().
-		
-		return null;  // Modify this to return something
+	@PostMapping("accounts/{accountId}/beneficiaries")
+	public ResponseEntity<Void> addBeneficiary(@PathVariable long accountId, @RequestParam String beneficiaryName) {
+		try {
+			// check if beneficiary name is null or empty
+			if (beneficiaryName == null || beneficiaryName.trim().isEmpty()) {
+				return ResponseEntity.badRequest().build();
+			}
+
+			// add the beneficiary to the account
+			accountManager.addBeneficiary(accountId, beneficiaryName);
+
+			// TODO-11: Create a ResponseEntity containing the location of the newly
+			// return ResponseEntity with the location of newly created beneficiary
+			return entityWithLocation(beneficiaryName);
+		} catch (NoSuchElementException e) {
+			// handle the case where account with specified id do not exists
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		} catch (Exception e) {
+			// handle other exceptions
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 	/**
