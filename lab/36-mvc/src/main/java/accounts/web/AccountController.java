@@ -63,11 +63,16 @@ public class AccountController {
 	// - Use the accountManager to obtain an account. This is the value to return
 	// - Save all work.
 	@GetMapping("/accounts/{entityId}")
-	public ResponseEntity<Account> accountDetails(@PathVariable Long entityId) {
-		if (entityId == null || accountManager.getAccount(entityId) == null) {
+	public ResponseEntity<Account> accountDetails(@PathVariable String entityId) {
+		try {
+			Long accountId = Long.parseLong(entityId);
+			if (accountId == null || accountManager.getAccount(accountId) == null) {
+				return ResponseEntity.notFound().build();
+			}
+			return ResponseEntity.ok(accountManager.getAccount(accountId));
+		} catch (NumberFormatException e) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(accountManager.getAccount(entityId));
 	}
 
 
