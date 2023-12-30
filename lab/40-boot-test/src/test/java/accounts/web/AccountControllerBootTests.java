@@ -60,15 +60,15 @@ public class AccountControllerBootTests {
 	@Test
 	public void accountDetailsFail() throws Exception {
 
-		//given(accountManager.getAccount(any(Long.class)))
-		//		.willThrow(new IllegalArgumentException("No such account with id " + 0L));
+		given(accountManager.getAccount(any(Long.class)))
+				.willThrow(new IllegalArgumentException("No such account with id " + 0L));
 
-		// (Write code here)
-		// - Use mockMvc to perform HTTP Get operation using "/accounts/9999"
-        //   as a non-existent account URL
-		// - Verify that the HTTP response status is 404
+		// perform the HTTP GET request for non-existent account
+		mockMvc.perform(get("/accounts/9999"))
+				.andExpect(status().isNotFound());
 
-		//verify(accountManager).getAccount(any(Long.class));
+		// verify that getAccount method was called with any Long argument
+		verify(accountManager).getAccount(any(Long.class));
 
 	}
 
