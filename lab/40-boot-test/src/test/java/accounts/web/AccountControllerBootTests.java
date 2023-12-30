@@ -2,20 +2,23 @@ package accounts.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
 // TODO-06: Get yourself familiarized with various testing utility classes
 // - Uncomment the import statements below
-//import static org.mockito.ArgumentMatchers.any;
-//import static org.mockito.BDDMockito.*;
-//import static org.mockito.Mockito.verify;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+// Mockito import for mocking and behavior driven development
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.*;
+import static org.mockito.Mockito.verify;
+
+// Springs MockMvc imports for web slice testing
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 // TODO-07: Replace @ExtendWith(SpringExtension.class) with the following annotation
 // - @WebMvcTest(AccountController.class) // includes @ExtendWith(SpringExtension.class)
-@ExtendWith(SpringExtension.class)
+@WebMvcTest(AccountController.class)
 public class AccountControllerBootTests {
 
 	// TODO-08: Autowire MockMvc bean
