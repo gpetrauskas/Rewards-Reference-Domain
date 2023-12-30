@@ -79,22 +79,19 @@ public class AccountControllerBootTests {
 	@Test
 	public void createAccount() throws Exception {
 
-		//Account testAccount = new Account("1234512345", "Mary Jones");
-		//testAccount.setEntityId(21L);
+		Account testAccount = new Account("1234512345", "Mary Jones");
+		testAccount.setEntityId(21L);
 
-		//given(accountManager.save(any(Account.class)))
-		//		.willReturn(testAccount);
+		given(accountManager.save(any(Account.class)))
+				.willReturn(testAccount);
 
-		// (Write code here)
-		// Use mockMvc to perform HTTP Post operation to "/accounts"
-		// - Set the request content type to APPLICATION_JSON
-		// - Set the request content with Json string of the "testAccount"
-		//   (Use "asJsonString" method below to convert the "testAccount"
-		//   object into Json string)
-		// - Verify that the response status is 201
-		// - Verify that the response "Location" header contains "http://localhost/accounts/21"
+		mockMvc.perform(post("/accounts")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(asJsonString(testAccount)))
+				.andExpect(status().isCreated())
+				.andExpect(header().string("Location", "http://localhost/accounts/21"));
 
-		//verify(accountManager).save(any(Account.class));
+		verify(accountManager).save(any(Account.class));
 
 	}
 
