@@ -2,7 +2,9 @@ package accounts.client;
 
 import common.money.Percentage;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -48,7 +50,8 @@ public class AccountClientTests {
 	 */
 	private static final String BASE_URL = "http://localhost:8080";
 
-	private RestTemplate restTemplate = new RestTemplate();
+	@Autowired
+	private TestRestTemplate restTemplate;
 	private Random random = new Random();
 
 	@Test
