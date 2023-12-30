@@ -1,8 +1,12 @@
 package accounts.web;
 
+import accounts.AccountManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
 
 // TODO-06: Get yourself familiarized with various testing utility classes
 // - Uncomment the import statements below
@@ -22,8 +26,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AccountControllerBootTests {
 
 	// TODO-08: Autowire MockMvc bean
+	@Autowired
+	private MockMvc mockMvc;
 
 	// TODO-09: Create AccountManager mock bean using @MockBean annotation
+	@MockBean
+	private AccountManager accountManager;
 
 	// TODO-10: Write positive test for GET request for an account
 	// - Uncomment the code and run the test and verify it succeeds
