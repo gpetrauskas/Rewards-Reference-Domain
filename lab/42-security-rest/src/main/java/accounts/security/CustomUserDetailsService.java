@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 // - Comment the @Component annotation added in a previous task
 
 @Primary
-@Component
+//@Component
 public class CustomUserDetailsService implements UserDetailsService {
 
 	private PasswordEncoder passwordEncoder;
