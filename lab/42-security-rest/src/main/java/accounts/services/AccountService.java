@@ -1,7 +1,10 @@
 package accounts.services;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Collection;
 import java.util.List;
@@ -22,7 +25,7 @@ public class AccountService {
     //       username, which can be accessed as
     //       principal.username or authentication.name.
     //
-    //@PreAuthorize(/* Add code here */)
+    @PreAuthorize("hasRole('ADMIN') and #username == authentication.name")
     public List<String> getAuthoritiesForUser(String username) {
 
         // TODO-08: Retrieve authorities (roles) for the logged-in user
@@ -36,7 +39,7 @@ public class AccountService {
         //   http://localhost:8080/authorities?username=<username>
         // - Verify that roles of the logged-in user get displayed
         Collection<? extends GrantedAuthority> grantedAuthorities
-                = null; // Modify this line
+                = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 
         return grantedAuthorities.stream()
                                  .map(GrantedAuthority::getAuthority)
