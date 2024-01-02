@@ -4,6 +4,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.core.userdetails.User;
@@ -33,7 +34,11 @@ public class RestSecurityConfig {
                 //   for all roles - "USER", "ADMIN", "SUPERADMIN"
         		// - Allow GET on the /authorities resource
                 //   for all roles - "USER", "ADMIN", "SUPERADMIN"
-
+						.requestMatchers(HttpMethod.DELETE, "/accounts/**").hasAnyRole("SUPERADMIN")
+						.requestMatchers(HttpMethod.POST, "/accounts/**").hasAnyRole("SUPERADMIN", "ADMIN")
+						.requestMatchers(HttpMethod.PUT, "/accounts/**").hasAnyRole("SUPERADMIN", "ADMIN")
+						.requestMatchers(HttpMethod.GET, "/accounts/**").hasAnyRole("SUPERADMIN", "ADMIN", "USER")
+						.requestMatchers(HttpMethod.GET, "/authorities").hasAnyRole("SUPERADMIN", "ADMIN", "USER")
                 // Deny any request that doesn't match any authorization rule
                 .anyRequest().denyAll())
         .httpBasic(withDefaults())
