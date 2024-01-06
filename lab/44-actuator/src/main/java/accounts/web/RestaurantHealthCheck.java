@@ -26,8 +26,9 @@ public class RestaurantHealthCheck implements HealthIndicator {
 
     public Health health() {
         return checkHowManyRestaurants() > 0 ?
-                Health.up().withDetail("Restaurant count:", + checkHowManyRestaurants()).build() :
-                Health.down().status("NO_RESTAURANTS").build();
+                Health.up().build() :
+                Health.down().status("NO_RESTAURANTS")
+                        .withDetail("Restaurant count", + checkHowManyRestaurants()).build();
     }
 
     private int checkHowManyRestaurants() {
