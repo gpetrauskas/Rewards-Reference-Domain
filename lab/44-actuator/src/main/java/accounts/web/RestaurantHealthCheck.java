@@ -25,11 +25,13 @@ public class RestaurantHealthCheck implements HealthIndicator {
     }
 
     public Health health() {
-        return checkIfRestaurantCountMoreThanZero() ? Health.up().build() : Health.down().build();
+        return checkHowManyRestaurants() > 0 ?
+                Health.up().withDetail("Restaurant count:", + checkHowManyRestaurants()).build() :
+                Health.down().status("NO_RESTAURANTS").build();
     }
 
-    private boolean checkIfRestaurantCountMoreThanZero() {
-        return restaurantRepository.getRestaurantCount() > 0;
+    private int checkHowManyRestaurants() {
+        return Math.toIntExact(restaurantRepository.getRestaurantCount());
     }
 
 
