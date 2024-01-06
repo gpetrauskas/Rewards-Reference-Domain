@@ -1,2 +1,5 @@
-package accounts.web;public enum CustomStatus {
+package accounts.web;
+
+public enum CustomStatus {
+    NO_RESTAURANTS
 }
